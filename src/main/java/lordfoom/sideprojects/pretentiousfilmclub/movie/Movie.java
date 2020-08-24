@@ -1,6 +1,7 @@
 package lordfoom.sideprojects.pretentiousfilmclub.movie;
 
 import com.sun.istack.NotNull;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.UniqueElements;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Data
 @NoArgsConstructor
+@Builder
 @Entity
 public class Movie {
     @Id
