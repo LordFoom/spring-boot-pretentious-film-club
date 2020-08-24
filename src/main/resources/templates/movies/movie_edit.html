@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--    <title th:text="#{view.index.title}">Welcome!</title>-->
+    <title>Welcome!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css"/>-->
+    <!--    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>-->
+    <!--    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>-->
+    <!-- CSS only -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.11.2/css/all.css} "/>
+    <!-- JS, Popper.js, and jQuery -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <!--    <script th:src="@{/webjars/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>-->
+    <script th:src="@{/webjars/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+    <style>
+        .small_width{max-width: 120px}
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+
+            <div th:if="${param.success}">
+                <div class="alert alert-info">
+                    You've successfully added a movie! <a href="@{/movies}">Review it?</a>!
+                </div>
+            </div>
+
+            <h2>Add Movie</h2>
+            <!--/*@thymesVar id="movie" type="lordfoom.sideprojects.pretentiousfilmclub.movie.MovieDto"*/-->
+            <form th:action="@{/movies/edit}" th:object="${movie}" method="post">
+
+                <p class="error-message"
+                   th:if="${#fields.hasGlobalErrors()}"
+                   th:each="error : ${#fields.errors('global')}"
+                   th:text="${error}">Validation error</p>
+
+                <div class="form-group row">
+                    <label for="name" class="control-label">Movie Name</label>
+                    <input id="name" class="form-control" th:field="*{name}"/>
+                    <span class="red" th:if="${#fields.hasErrors('name')}"
+                          th:errors="*{name}"></span>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="description" class="control-label">Description</label>
+                    <textarea id="description"
+                              class="form-control"
+                              th:field="*{description}"/>
+                    <span class="red" th:if="${#fields.hasErrors('description')}"
+                          th:errors="*{description}"></span>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="released" class="control-label">Released </label>
+                    <div class="input-group date" data-provide="datepicker" >
+                        <input type="text" class="form-control small_width" id="released" th:field="*{released}" >
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                    <span class="red" th:if="${#fields.hasErrors('released')}"
+                          th:errors="*{released}"></span>
+                </div>
+                <div class="form-group" row>
+                    <button type="submit" class="btn btn-success">Add Movie</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $('.input-group.date').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        format: 'yyyy-mm-dd'
+    });
+</script>
+<div th:replace="fragments/footer::footer"></div>
+</body>
+</html>

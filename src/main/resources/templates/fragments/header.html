@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<!--    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}" type="text/css"/>-->
+<!--    <script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"></script>-->
+<!--    <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>-->
+<!--    <script th:src="@{/webjars/popper/popper.min.js}"></script>-->
+</head>
+<body>
+<div class="container" th:fragment="header">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+    <a class="navbar-brand" href="#">Pretentious Film Club</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" th:classappend="${module == 'home' ? 'active' : ''}">
+                <a class="nav-link" href="#" th:href="@{/}">Home </a>
+            </li>
+            <li class="nav-item dropdown" aria-labelledby="navbarDropdown" th:classappend="${module == 'movies' ? 'active' : ''}">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Movies
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#" th:href="@{/movies}">View Movies</a>
+                <a class="dropdown-item" href="#" th:href="@{/movies/add}">Add Movie</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/reviews}">Reviews</a>
+            </li>
+            <li class="nav-item dropdown"></li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link" th:href="@{/logout}">Sign Out </a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()"></li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+</div>
+</body>
+</html>

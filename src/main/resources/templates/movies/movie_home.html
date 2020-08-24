@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--    <title th:text="#{view.index.title}">Welcome!</title>-->
+    <title>Welcome!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css"/>-->
+    <!--    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>-->
+    <!--    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>-->
+    <!-- CSS only -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <!-- JS, Popper.js, and jQuery -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <style>
+        .small_width{max-width: 120px}
+        .tableMain{padding: 0 0 0 10px}
+
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<div class="container">
+    <!-- /* Handle the flash message */-->
+    <!--    <th:block th:if="${message != null}">-->
+    <!--        &lt;!&ndash; /* The message code is returned from the @Controller */ &ndash;&gt;-->
+    <!--        <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</div>-->
+    <!--    </th:block>-->
+
+    <br />
+    <h2>Movies in the system</h2>
+<!--    <div class="row" th:each="movie: ${movies}">-->
+<!--        <div class="col-sm-2" th:text="${movie.name}"></div>-->
+<!--    </div>-->
+    <table class="table table-bordered tableMain">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Released</th>
+            <th>Reviews</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="movie" type="lordfoom.sideprojects.pretentiousfilmclub.movie.Movie"*/-->
+        <tr th:each="movie : ${movies.content}">
+            <td th:text="${movie.id}"></td>
+            <td th:text="${movie.name}"></td>
+            <td th:text="${#dates.format(movie.released, 'yyyy-MM-dd')}"></td>
+<!--            <td ><a th:href="@{/movies/{movieId}(movieId=${movie.id})}/add">Review</a> </td>-->
+            <td >
+
+                <a th:href="@{/movies/{id}/reviews(id=${movie.id})}">See reviews</a><br />
+                <a th:href="@{/movies/{id}/review(id=${movie.id})}">Add review</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+   <!-- customers pagination -->
+<!--<nav aria-label="Pagination" th:if="${movies.totalPages gt 0}">-->
+<!--    <ul class="pagination justify-content-center font-weight-bold">-->
+<!--        <li class="page-item" th:classappend="${movies.number eq 0} ? 'disabled'">-->
+<!--            <a class="page-link"-->
+<!--               th:href="@{/movies?page={id}(id=${movies.number lt 2 ? 1 : movies.number})}"-->
+<!--               aria-label="Previous" title="Previous Page" data-toggle="tooltip">-->
+<!--                <span aria-hidden="true">&laquo;</span>-->
+<!--            </a>-->
+<!--        </li>-->
+<!--        <li class="page-item" th:classappend="${i eq movies.number + 1} ? 'active'"-->
+<!--            th:each="i : ${#numbers.sequence( 1, movies.totalPages, 1)}">-->
+<!--            <a class="page-link" th:href="@{/movies?page={id}(id=${i})}" th:text="${i}"-->
+<!--               th:title="${'Page '+ i}" data-toggle="tooltip"></a>-->
+<!--        </li>-->
+<!--        <li class="page-item" th:classappend="${movies.number + 1 eq movies.totalPages} ? 'disabled'">-->
+<!--            <a class="page-link"-->
+<!--               th:href="@{/movies?page={id}(id=${movies.number + 2})}"-->
+    <!--               aria-label="Next" title="Next Page" data-toggle="tooltip">-->
+    <!--                <span aria-hidden="true">&raquo;</span>-->
+    <!--            </a>-->
+    <!--        </li>-->
+<!--    </ul>-->
+<!--</nav>-->
+
+
+</div>
+<div th:replace="fragments/footer::footer"></div>
+</body>
+</html>

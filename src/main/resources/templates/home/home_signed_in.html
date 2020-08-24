@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<!--    <title th:text="#{view.index.title}">Welcome!</title>-->
+    <title>Welcome!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!--    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" type="text/css"/>-->
+<!--    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>-->
+<!--    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>-->
+    <!-- CSS only -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <!-- JS, Popper.js, and jQuery -->
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<div class="container">
+    <!-- /* Handle the flash message */-->
+<!--    <th:block th:if="${message != null}">-->
+<!--        &lt;!&ndash; /* The message code is returned from the @Controller */ &ndash;&gt;-->
+<!--        <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}(${#authentication.name})})">&nbsp;</div>-->
+<!--    </th:block>-->
+    <h1>
+        Welcome, Critic!
+    </h1>
+    <h2>A snooty little toy app I am building to keep track of my amazing taste in movies.</h2>
+</div>
+<div th:replace="fragments/footer::footer"></div>
+</body>
+</html>
