@@ -30,3 +30,6 @@ out/
 
 ### VS Code ###
 .vscode/
+gradle/wrapper/gradle-wrapper.jar
+src/main/java/lordfoom/sideprojects/pretentiousfilmclub/controllers/
+src/main/resources/db/changelog/patches/
