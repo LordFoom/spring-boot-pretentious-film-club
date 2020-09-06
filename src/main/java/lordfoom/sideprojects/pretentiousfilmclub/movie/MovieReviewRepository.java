@@ -13,4 +13,6 @@ public interface MovieReviewRepository extends JpaRepository<MovieReview, MovieR
     public Set<MovieReview> findByCritic(Critic critic);
 
     public Set<MovieReview> findAllByMovieId(Long id);
+
+
 }
