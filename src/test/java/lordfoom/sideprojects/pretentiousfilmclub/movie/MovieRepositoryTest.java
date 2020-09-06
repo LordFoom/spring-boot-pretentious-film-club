@@ -58,22 +58,10 @@ class MovieRepositoryTest {
 
     @Test
     void findAllByNameContaining() {
-//        LocalDate localReleaseDate = LocalDate.of(2020, 8, 24);
-//        Date releaseDate = Date.from(localReleaseDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-//        Movie movie = Movie.builder()
-//                           .description("Test movie Review")
-//                           .name(FOOM_S_FURIOUS_FUNRIDE)
-////                           .id(1L)
-//                           .created(new Date())
-//                           .released(releaseDate).build();
-//        entityManager.persist(movie);
-//        movieRepository.save(movie);
         List<Movie> movieList = movieRepository.findAllByNameContaining("Foom");
         assertEquals(movieList.size(), 1);
         Movie movieRetrieved = movieList.get(0);
-
         assertEquals(FOOM_S_FURIOUS_FUNRIDE, movieRetrieved.getName());
-
    }
 
     @Test
@@ -81,5 +69,8 @@ class MovieRepositoryTest {
         Optional<Movie> byName = movieRepository.findByName(SECOND_MOVIE_NAME);
         assertTrue(byName.isPresent());
         assertEquals(SECOND_MOVIE_NAME, byName.get().getName());
+
+        Optional<Movie> byNameEmpty = movieRepository.findByName("DOES_NOT_EXIST");
+        assertFalse(byNameEmpty.isPresent());
     }
 }
