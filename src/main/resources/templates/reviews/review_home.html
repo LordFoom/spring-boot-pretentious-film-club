@@ -45,7 +45,7 @@
             <td th:text="${review.movie.name}"></td>
             <td th:text="${#dates.format(review.created, 'yyyy-MM-dd')}"></td>
             <td th:text="${review.critic.username}"></td>
-            <td th:text="View" th:href="@{/movies/{id}/reviews(id=${review.movie.id})}"></td>
+            <td ><a th:href="@{/movies/{id}/reviews(id=${review.movie.id})}">View</a></td>
         </tr>
         </tbody>
     </table>
