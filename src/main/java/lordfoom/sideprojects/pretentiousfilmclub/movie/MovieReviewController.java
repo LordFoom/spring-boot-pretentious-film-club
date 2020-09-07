@@ -1,5 +1,6 @@
 package lordfoom.sideprojects.pretentiousfilmclub.movie;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @RequestMapping("/reviews")
 public class MovieReviewController {
 
+    @Autowired
     MovieReviewService movieReviewService;
 
     @GetMapping
@@ -20,7 +22,7 @@ public class MovieReviewController {
 
         int currPage = page.orElse(0);
         int pageSize = size.orElse(10);
-        String sort = sortBy.orElse("released");
+        String sort = sortBy.orElse("created");
         String drct = direction.orElse("desc");
         Sort.Direction sortDirection = Sort.Direction.fromString(drct);
         model.addAttribute("reviews", movieReviewService.getPageOfMovieReviews(currPage, pageSize, sort, sortDirection));
